@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achola's Icing</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
+   <section class="hero-section mx-10">
     <h1>Cakes</h1>
-</body>
-</html>
+    <a href="{% url 'shop' %}" style="text-decoration: underline;">See the shop</a>
+   </section> 
+
+{% endblock %}
