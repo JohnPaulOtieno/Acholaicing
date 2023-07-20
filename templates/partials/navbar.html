@@ -1,0 +1,24 @@
+<!-- navbar -->
+<nav class="relative container mx-auto p-6">
+    <div class="flex items-center justify-between">
+      <!-- the logo text-->
+      <div>
+        <h1 class="text-black text-xl font-bold">Achola's Icing</h1>
+      </div>
+  
+      <!-- Menu Items -->
+      <div class="hidden space-x-6 md:flex">
+        <a href="{% url 'homepage' %}" class="hover:text-white">Home</a>
+        <a href="#" class="hover:text-white">About Us</a>
+        <a href="{% url 'shop' %}" class="hover:text-teal">Shop</a>
+        <a href="#" class="hover:text-white">Offers</a>
+        <!-- insert the link to the offers page here -->
+        <a href="#" class="hover:text-white">Offers</a>
+      </div>
+      
+      <a href="#"
+        class="p-3 px-6 pt-2 bg-black text-white rounded-full baseline hover:bg-teal md:block">Make an order</a>
+
+  
+    </div>
+  </nav>

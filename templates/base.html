@@ -1,0 +1,31 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amayo</title>
+  {% tailwind_css %}
+</head>
+
+<body>
+    <!-- All pages in the application will inherit this boilerplate -->
+    <!-- The navigation bar and the footer will be contained in a folder called partials -->
+    <!-- The folder name partial is not specific to django rather most frameworks -->
+  <div class="min-h-screen flex flex-col">
+    <!-- Here we make sure the navigation bar is included in each  -->
+    {% include 'partials/navbar.html' %} 
+
+    <!-- This is the main content that is unique to each page -->
+    <main class="flex-grow">
+        <!-- content will be inserted here -->
+      {% block content %}
+      {% endblock%}
+    </main>
+    <!-- This is the footer for all pages -->
+    {% include 'partials/footer.html' %}
+  </div>
+</body>
+
+</html>
