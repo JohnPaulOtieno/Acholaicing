@@ -8,17 +8,25 @@
   
       <!-- Menu Items -->
       <div class="hidden space-x-6 md:flex">
-        <a href="{% url 'homepage' %}" class="hover:text-white">Home</a>
-        <a href="#" class="hover:text-white">About Us</a>
+        <a href="{% url 'homepage' %}" class="">Home</a>
+        <a href="#" class="">About Us</a>
         <a href="{% url 'shop' %}" class="hover:text-teal">Shop</a>
-        <a href="#" class="hover:text-white">Offers</a>
         <!-- insert the link to the offers page here -->
-        <a href="#" class="hover:text-white">Offers</a>
+        <a href="#" class="">Offers</a>
       </div>
       
       <a href="#"
         class="p-3 px-6 pt-2 bg-black text-white rounded-full baseline hover:bg-teal md:block">Make an order</a>
 
-  
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}"
+        class="p-3 px-6 pt-2 bg-black text-white rounded-full baseline hover:bg-teal md:block">Logout</a>
+        {% else %}
+        <!-- Button visible for unauthenticated users -->
+        <a href="{% url 'login' %}"
+        class="p-3 px-6 pt-2 bg-black text-white rounded-full baseline hover:bg-teal md:block">Login</a>
+        {% endif %}
+        
+ 
     </div>
   </nav>
