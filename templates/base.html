@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amayo</title>
+  <title>Achola's Icing</title>
   {% tailwind_css %}
 </head>
 
@@ -17,6 +17,18 @@
     <!-- Here we make sure the navigation bar is included in each  -->
     {% include 'partials/navbar.html' %} 
 
+    <!-- Include any messages we would want the user to know about -->
+    {% if messages %}
+    <div id="dismissible-alert" class="bg-black-100 border border-green-400 text-blue-700 mx-10 px-4 py-3 rounded relative" role="alert">
+      {% for message in messages %}
+      <span class="block sm:inline">{{ message }}</span>
+      <button type="button" class="absolute top-0 right-0 px-4 py-3" id="dismiss-alert">
+        <span class="text-cyan-700">&times;</span>
+      </button>
+      {% endfor %}
+    </div>
+    {% endif %}
+
     <!-- This is the main content that is unique to each page -->
     <main class="flex-grow">
         <!-- content will be inserted here -->
@@ -26,6 +38,14 @@
     <!-- This is the footer for all pages -->
     {% include 'partials/footer.html' %}
   </div>
+  <script>
+    const dismissButton = document.getElementById('dismiss-alert');
+    const alertContainer = document.getElementById('dismissible-alert');
+  
+    dismissButton.addEventListener('click', () => {
+      alertContainer.style.display = 'none';
+    });
+  </script>
 </body>
 
 </html>
