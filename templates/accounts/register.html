@@ -11,18 +11,13 @@
 
 <body>
     {% if messages %}
-    <div class="bg-warning-200 text-yellow-800 p-4 mb-4 rounded relative">
-        {% for message in messages %}
-        <span class="block sm:inline">{{ message }}</span>
-        <!-- <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" data-dismiss="alert" aria-label="Close">
-            <svg class="fill-current h-6 w-6 text-yellow-700" role="button" xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20">
-                <title>Close</title>
-                <path
-                    d="M14.348 5.652a1 1 0 0 0-1.414 0L10 8.586 6.066 5.652a1 1 0 1 0-1.414 1.414L8.586 10l-3.93 3.93a1 1 0 1 0 1.414 1.414L10 11.414l3.93 3.93a1 1 0 0 0 1.414-1.414L11.414 10l3.93-3.93a1 1 0 0 0 0-1.414z" />
-            </svg>
-        </button> -->
-        {% endfor %}
+    <div id="dismissible-alert" class="bg-black-100 border border-green-400 text-blue-700 mx-10 px-4 py-3 rounded relative" role="alert">
+      {% for message in messages %}
+      <span class="block sm:inline">{{ message }}</span>
+      <button type="button" class="absolute top-0 right-0 px-4 py-3" id="dismiss-alert">
+        <span class="text-cyan-700">&times;</span>
+      </button>
+      {% endfor %}
     </div>
     {% endif %}
     <section class="h-screen">
