@@ -7,6 +7,22 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Here are the available offers</h1>
+    
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Here are the available offers</h1>
+<h1>Cake Offers</h1>
+<ul>
+    {% for cake in cakes %}
+    <li>
+        <h2>{{ cake.name_of_cake }}</h2>
+        <p>{{ cake.description }}</p>
+        <p>Pricing: {{ cake.pricing }}</p>
+        <img src="{{ cake.image.url }}" alt="{{ cake.name_of_cake}} Image">
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
 </body>
 </html>

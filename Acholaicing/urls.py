@@ -24,4 +24,12 @@ urlpatterns = [
     path('about/', include("about.urls")),
     path('shop/', include("shop.urls")),
     path('accounts/', include('accounts.urls')),
-    path('offers/', include("offers.urls"))
+    path('offers/', include("offers.urls")),
+    path('cake_offers/', include("offers.urls"))
+]
+
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
