@@ -1,4 +1,3 @@
-from django.views.generic.base import TemplateView
+from django.shortcuts import render
 
-class ShopView(TemplateView):
-    template_name = "shop/shop.html"
+# Create your views here.
