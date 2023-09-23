@@ -20,3 +20,6 @@ class Products(models.Model):
             return Products.objects.filter (category=category_id)
         else:
             return Products.get_all_products();
+
+    def __str__(self):
+        return self.name
