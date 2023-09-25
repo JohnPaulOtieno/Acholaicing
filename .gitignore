@@ -2,3 +2,5 @@ dev/
 venv/
 **/__pycache__/
 scripts.sh
+
+.env

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-w_h4trs&5!xy4p=ns!y@=y1bsc_qxthkmp03+n@2in&^s@)rsp'
+#SECRET_KEY = 'django-insecure-w_h4trs&5!xy4p=ns!y@=y1bsc_qxthkmp03+n@2in&^s@)rsp'
+#SECRET_KEY = env('SECRET_KEY') 
+SECRET_KEY = env.str('SECRET_KEY', default=get_random_secret_key())
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -36,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django_browser_reload',
     'store'
@@ -47,8 +55,14 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+# settings.py
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'acholaicing.fly.dev']  # <-- Updated!
+
+CSRF_TRUSTED_ORIGINS = ['https://acholaicing.fly.dev']  # <-- Updated!
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,6 +73,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Acholaicing.urls'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TEMPLATES = [
     {
@@ -82,11 +98,18 @@ WSGI_APPLICATION = 'Acholaicing.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+"""
+
+DATABASES = {
+    # read os.environ['DATABASE_URL']
+    'default': env.db()  # <-- Updated!
 }
 
 
@@ -134,3 +157,11 @@ MEDIA_URL = "/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+env = environ.Env(  # <-- Updated!
+    # set casting, default value
+    DEBUG=(bool, False),
+)
+
+environ.Env.read_env(BASE_DIR / '.env')
