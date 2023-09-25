@@ -55,6 +55,6 @@ def store(request):
     data['categories'] = categories
 
     print('you are : ', request.session.get('email'))
-    return render(request, 'index.html', data)
+    return render(request, 'home.html', data)
 
 
