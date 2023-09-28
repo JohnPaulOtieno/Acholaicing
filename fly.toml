@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for acholaicing on 2023-09-25T18:25:32+03:00
+# fly.toml app configuration file generated for acholaicing on 2023-09-28T17:23:52+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -24,5 +24,5 @@ console_command = "/code/manage.py shell"
   processes = ["app"]
 
 [[statics]]
-  guest_path = "/code/staticfiles"
+  guest_path = "/code/static"
   url_prefix = "/static/"

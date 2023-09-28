@@ -14,9 +14,16 @@ from pathlib import Path
 import environ
 from django.core.management.utils import get_random_secret_key
 
+env = environ.Env(  # <-- Updated!
+    # set casting, default value
+    DEBUG=(bool, False),
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Take environment variables from .env file
+environ.Env.read_env(BASE_DIR / '.env')  # <-- Updated!
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -26,11 +33,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #SECRET_KEY = env('SECRET_KEY') 
 SECRET_KEY = env.str('SECRET_KEY', default=get_random_secret_key())
 
-
-
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = env('DEBUG')
+DEBUG = env('DEBUG')  # <-- Updated!
+
 
 ALLOWED_HOSTS = []
 
@@ -43,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',  # <-- Updated!
     'django.contrib.staticfiles',
     'django_browser_reload',
     'store'
@@ -62,7 +67,7 @@ CSRF_TRUSTED_ORIGINS = ['https://acholaicing.fly.dev']  # <-- Updated!
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # <-- Updated!
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,8 +78,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Acholaicing.urls'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # <-- Updated!
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # <-- Updated!
 
 TEMPLATES = [
     {
@@ -159,9 +164,4 @@ MEDIA_URL = "/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-env = environ.Env(  # <-- Updated!
-    # set casting, default value
-    DEBUG=(bool, False),
-)
 
-environ.Env.read_env(BASE_DIR / '.env')
